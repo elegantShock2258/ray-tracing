@@ -1,4 +1,5 @@
 build/
 *.log
 .vscode
-defaults.cfg
+a.out
+*.unc*
