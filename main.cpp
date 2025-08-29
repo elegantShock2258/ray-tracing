@@ -4,6 +4,8 @@
 #define OUT_PATH "build/image.ppm"
 #include "graphics/camera.cpp"
 #include "graphics/scene.cpp"
+#include "materials/solid.cpp"
+#include "models/sphere.cpp"
 #include "renderers/renderers.cpp"
 
 struct stat st = {0};
@@ -34,8 +36,14 @@ int main(int n, char **args) {
   Scene scene(aspect_ratio, image_width, &cam);
 
   fprintf(image, "P3\n%d %d\n255\n", image_width, image_height);
-  // renderImage(image, image_width, image_height);
-  SkyTracer(image, &scene);
+
+  Color red(255, 0, 0);
+  Material *M = new SolidMaterial(red);
+
+  Sphere s(M, Point(0, 0, -1), 0.5);
+  scene.shapes.push_back(&s);
+
+  scene.renderScene(image, getSkyRayColor);
   printf("image rendered");
 
   return 0;
