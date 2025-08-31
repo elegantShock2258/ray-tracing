@@ -2,6 +2,7 @@
 #include "../models/shape.cpp"
 #include "../renderers/utils.cpp"
 #include "./camera.cpp"
+#include "./utils.cpp"
 #include <vector>
 class Scene {
 private:
@@ -10,7 +11,7 @@ private:
   Camera *camera;
 
 public:
-  std::vector<Shape *> shapes;
+  HittableList world;
   // include a render method that goes through shapes and sees if the ray goes
   // through it, if it does and then use material color to get color and write
   // color to pixel
@@ -43,12 +44,9 @@ public:
         Ray ray(camera_center, ray_direction);
 
         Color pixel_color = getRayColor(ray);
-
-        for (auto shape : shapes) {
-          if (shape->hits(ray) > 0.0) {
-            auto res = shape->M->getMaterialColor(center);
-            pixel_color = res;
-          }
+        HitRecord rec;
+        if (this->world.hit(ray, 0, infinity, rec)) {
+          pixel_color =  0.5 * (rec.normal + Color(1, 1, 1));
         }
 
         WritePixelInImage(image, pixel_color);

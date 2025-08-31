@@ -1,6 +1,7 @@
 #include "../materials/material.cpp"
 #include "./shape.cpp"
 #include <cmath>
+
 class Sphere : public Shape {
 private:
   Point center;
@@ -13,19 +14,32 @@ public:
     this->r = r;
   }
 
-  double hits(const Ray &r) override {
+  bool hit(const Ray &r, double ray_tmin, double ray_tmax,
+             HitRecord &rec) const override {
     // if |(P-C)|2 == r2
-    Vector3 oc =  -r.origin() + this->center;
+    Vector3 oc = center - r.origin();
     auto a = r.direction().length_squared();
-    auto b = -2.0 * dot(r.direction(), oc);
-    auto c = oc.length_squared() - (this->r * this->r);
-    auto D = b * b - 4 * a * c;
+    auto h = dot(r.direction(), oc);
+    auto c = oc.length_squared() - this->r * this->r;
 
+    auto discriminant = h * h - a * c;
+    if (discriminant < 0)
+      return false;
 
-    if (D < 0) {
-      return -1.0;
-    } else {
-      return (-b - std::sqrt(D)) / (2.0 * a);
+    auto sqrtd = std::sqrt(discriminant);
+
+    // Find the nearest root that lies in the acceptable range.
+    auto root = (h - sqrtd) / a;
+    if (root <= ray_tmin || ray_tmax <= root) {
+      root = (h + sqrtd) / a;
+      if (root <= ray_tmin || ray_tmax <= root)
+        return false;
     }
+
+    rec.t = root;
+    rec.p = r.at(rec.t);
+    rec.set_face_normal(r, (rec.p - center) / this->r);
+
+    return true;
   }
 };

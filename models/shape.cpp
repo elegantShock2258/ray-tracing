@@ -1,8 +1,7 @@
 #pragma once
 #include "../materials/material.cpp"
-#include "../maths/ray.cpp"
-class Shape {
+#include "./hittable.cpp"
+class Shape : public Hittable {
 public:
   Material *M;
-  virtual double hits(const Ray &p) { return 0; };
 };
