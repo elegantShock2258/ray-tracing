@@ -14,8 +14,7 @@ public:
     this->r = r;
   }
 
-  bool hit(const Ray &r, double ray_tmin, double ray_tmax,
-             HitRecord &rec) const override {
+  bool hit(const Ray &r, Interval &rayt, HitRecord &rec) const override {
     // if |(P-C)|2 == r2
     Vector3 oc = center - r.origin();
     auto a = r.direction().length_squared();
@@ -30,9 +29,9 @@ public:
 
     // Find the nearest root that lies in the acceptable range.
     auto root = (h - sqrtd) / a;
-    if (root <= ray_tmin || ray_tmax <= root) {
+    if (!rayt.surrounds(root)) {
       root = (h + sqrtd) / a;
-      if (root <= ray_tmin || ray_tmax <= root)
+      if (!rayt.surrounds(root))
         return false;
     }
 

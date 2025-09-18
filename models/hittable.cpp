@@ -1,4 +1,5 @@
 #pragma once
+#include "../maths/interval.cpp"
 #include "../maths/ray.cpp"
 #include "../maths/vector.cpp"
 #include <bits/stdc++.h>
@@ -21,8 +22,7 @@ class Hittable {
 public:
   virtual ~Hittable() = default;
 
-  virtual bool hit(const Ray &r, double ray_tmin, double ray_tmax,
-                   HitRecord &rec) const = 0;
+  virtual bool hit(const Ray &r, Interval &ray_t, HitRecord &rec) const = 0;
 };
 
 class HittableList : public Hittable {
@@ -36,14 +36,14 @@ public:
 
   void add(Hittable *object) { objects.push_back(object); }
 
-  bool hit(const Ray &r, double ray_tmin, double ray_tmax,
-           HitRecord &rec) const override {
+  bool hit(const Ray &r, Interval &ray_t, HitRecord &rec) const override {
     HitRecord temp_rec;
     bool hit_anything = false;
-    auto closest_so_far = ray_tmax;
+    auto closest_so_far = ray_t.max;
 
     for (const auto &object : objects) {
-      if (object->hit(r, ray_tmin, closest_so_far, temp_rec)) {
+      auto intt = Interval(ray_t.min, closest_so_far);
+      if (object->hit(r, intt, temp_rec)) {
         hit_anything = true;
         closest_so_far = temp_rec.t;
         rec = temp_rec;

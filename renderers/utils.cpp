@@ -1,12 +1,17 @@
 #pragma once
-#include <cstdio>
+#include "../maths/interval.cpp"
 #include "../maths/vector.cpp"
+#include <cstdio>
 
 inline void WritePixelInImage(FILE *image, Point &p) {
 
-  int ir = (int)(255.999 * p.x());
-  int ig = (int)(255.999 * p.y());
-  int ib = (int)(255.999 * p.z());
+  auto r = p.x();
+  auto g = p.y();
+  auto b = p.z();
 
-  fprintf(image, "%d %d %d\n", ir, ig, ib);
+  static const Interval intensity(0.000, 0.999);
+  int rbyte = int(256 * intensity.clamp(r));
+  int gbyte = int(256 * intensity.clamp(g));
+  int bbyte = int(256 * intensity.clamp(b));
+  fprintf(image, "%d %d %d\n", rbyte, gbyte, bbyte);
 }

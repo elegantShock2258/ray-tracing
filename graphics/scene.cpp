@@ -4,6 +4,7 @@
 #include "./camera.cpp"
 #include "./utils.cpp"
 #include <vector>
+
 class Scene {
 private:
   double aspect_ratio, vh, vw;
@@ -32,25 +33,7 @@ public:
   Vector3 j() { return this->camera->getImageJ(); }
   Vector3 cam_center() { return this->camera->getCenter(); }
 
-  void renderScene(FILE *image, Color (*getRayColor)(Ray &)) {
-    auto center = this->camera->getCenter();
-    for (int j = 0; j < this->image_height; j++) {
-      for (int i = 0; i < this->image_width; i++) {
-        auto pixel_center = this->camera->getImageOrigin() +
-                            (i * this->camera->getImageI()) +
-                            (j * this->camera->getImageJ());
-        auto ray_direction = pixel_center - this->camera->getCenter();
-        auto camera_center = this->camera->getCenter();
-        Ray ray(camera_center, ray_direction);
-
-        Color pixel_color = getRayColor(ray);
-        HitRecord rec;
-        if (this->world.hit(ray, 0, infinity, rec)) {
-          pixel_color =  0.5 * (rec.normal + Color(1, 1, 1));
-        }
-
-        WritePixelInImage(image, pixel_color);
-      }
-    }
+  void render(FILE* image){
+    this->camera->renderScene(image,image_width, image_height,this->world);
   }
 };

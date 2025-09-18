@@ -56,8 +56,8 @@ int main(int n, char **args) {
   scene.world.add(&t);
 
 
-  scene.renderScene(image, getSkyRayColor);
-  printf("image rendered");
+  scene.render(image);
+  printf("\nimage rendered");
 
   return 0;
 }
