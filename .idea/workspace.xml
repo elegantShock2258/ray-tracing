@@ -16,15 +16,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19936813-65af-4d35-b9ba-dec4b5801bdb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/maths/interval.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphics/camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/camera.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/utils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/utils.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/hittable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/models/hittable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/sphere.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/models/sphere.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renderers/utils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/renderers/utils.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/solid.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/materials/solid.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maths/interval.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/maths/interval.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maths/vector.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/maths/vector.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,21 +34,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "elegantShock2258"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;elegantShock2258&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/elegantShock2258/ray-tracing.git",
-    "accountId": "5a8da3ce-cb9b-4682-9e4d-6c2f72923551"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/elegantShock2258/ray-tracing.git&quot;,
+    &quot;accountId&quot;: &quot;5a8da3ce-cb9b-4682-9e4d-6c2f72923551&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="32nMI3AKkfmCAWrxuCv3ZQW1HQ2" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -62,6 +59,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
@@ -86,6 +84,7 @@
       <option name="presentableId" value="Default" />
       <updated>1758051805741</updated>
       <workItem from="1758051811068" duration="1152000" />
+      <workItem from="1765717542666" duration="2074000" />
     </task>
     <servers />
   </component>

@@ -27,7 +27,7 @@ private:
     return Ray(ray_a, dir);
   }
 public:
-  int samples_per_pixel = 200;
+  int samples_per_pixel = 10;
 
   Camera(int focal_length, int vh, Vector3 center, int image_height,
          int image_width) {
@@ -53,8 +53,7 @@ public:
   Vector3 getImageJ() { return this->image_j; }
   Vector3 getCenter() { return this->center; }
 
-  Color getRayColor(const Ray &r, const Hittable &world) const {
-    HitRecord rec;
+  Color getRayColor(const Ray &r, const Hittable &world,HitRecord &rec) const {
     auto y = Interval(0, infinity);
     if (world.hit(r, y, rec)) {
       return 0.5 * (rec.normal + Color(1, 1, 1));
@@ -69,6 +68,7 @@ public:
                    Hittable &world) {
     auto center = this->getCenter();
 
+    HitRecord rec;
     progressbar bar(image_height*image_width);
     for (int j = 0; j < image_height; j++) {
       for (int i = 0; i < image_width; i++) {
@@ -82,7 +82,7 @@ public:
         Color pc(0, 0, 0);
         for (int sample = 0; sample < this->samples_per_pixel; sample++) {
           Ray t = getRayFromCamera(i, j);
-          pc += this->getRayColor(t, world);
+          pc += this->getRayColor(t, world,rec);
         }
         pc /= samples_per_pixel;
         WritePixelInImage(image, pc);

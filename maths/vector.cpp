@@ -1,4 +1,5 @@
 #pragma once
+#include "../graphics/utils.cpp"
 #include <cmath>
 #include <iostream>
 
@@ -74,6 +75,17 @@ inline Vector3 cross(const Vector3 &u, const Vector3 &v) {
   return Vector3(u.e[1] * v.e[2] - u.e[2] * v.e[1],
                  u.e[2] * v.e[0] - u.e[0] * v.e[2],
                  u.e[0] * v.e[1] - u.e[1] * v.e[0]);
+}
+static Vector3 randomVector() {
+  return Vector3(random_double(), random_double(), random_double());
+}
+static Vector3 randomVector(double min, double max) {
+  return Vector3(random_double(min, max), random_double(min, max),
+                 random_double(min, max));
+}
+
+static Vector3 randomUnitVector(){
+  return Vector3(sin(random_double()),sin(random_double()),sin(random_double()));
 }
 
 inline Vector3 unit_vector(const Vector3 &v) { return v / v.length(); }
