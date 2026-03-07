@@ -3,6 +3,7 @@
 #include "../renderers/utils.cpp"
 #include "./camera.cpp"
 #include "./utils.cpp"
+#include <fstream>
 #include <vector>
 
 class Scene {
@@ -33,7 +34,7 @@ public:
   Vector3 j() { return this->camera->getImageJ(); }
   Vector3 cam_center() { return this->camera->getCenter(); }
 
-  void render(FILE* image){
+  void render(std::fstream& image){
     this->camera->renderScene(image,image_width, image_height,this->world);
   }
 };

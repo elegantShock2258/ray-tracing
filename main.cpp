@@ -1,12 +1,13 @@
-#include <stdio.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 #include "graphics/camera.cpp"
 #include "graphics/scene.cpp"
 #include "materials/procedural.cpp"
 #include "materials/solid.cpp"
 #include "models/sphere.cpp"
 #include "renderers/renderers.cpp"
+#include <fstream>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include "config.cpp"
 
@@ -27,9 +28,9 @@ int main(int n, char **args) {
     mkdir("build", 0700);
   }
 
-  FILE *image = fopen(OUT_PATH, "w");
+  auto image = std::fstream(OUT_PATH, std::ios::out | std::ios::trunc);
 
-  if (image == NULL) {
+  if (image.fail()) {
     printf("failed to make image file\n");
     return -1;
   }
@@ -40,7 +41,7 @@ int main(int n, char **args) {
   Camera cam(1.0, 2.0, Vector3(0, 0, 0), image_height, IMAGE_WIDTH);
   Scene scene(ASPECT_RATIO, IMAGE_WIDTH, &cam);
 
-  fprintf(image, "P3\n%d %d\n255\n", IMAGE_WIDTH, image_height);
+  image << "P3\n" << IMAGE_WIDTH << " " << image_height << "\n255\n";
 
   Color red(255, 0, 0);
   Color blank(1, 1, 1);
@@ -53,7 +54,6 @@ int main(int n, char **args) {
 
   scene.world.add(&s);
   scene.world.add(&t);
-
 
   scene.render(image);
   printf("\nimage rendered");
