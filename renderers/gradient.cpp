@@ -4,11 +4,11 @@
 #include <stdio.h>
 #include "./utils.cpp"
 
-void renderGradient(std::fstream &image, int IMAGE_HEIGHT, int IMAGE_WIDTH) {
-  for (int i = 0; i < IMAGE_HEIGHT; i++) {
-    for (int j = 0; j < IMAGE_WIDTH; j++) {
-      double r = (double)(i) / (IMAGE_WIDTH - 1);
-      double g = (double)(j) / (IMAGE_HEIGHT - 1);
+void renderGradient(std::fstream &image, int h, int w) {
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j <w; j++) {
+      double r = (double)(i) / (w - 1);
+      double g = (double)(j) / (h - 1);
       double b = 0.0;
       auto t = Color(r, g, b);
       WritePixelInImage(image, t);

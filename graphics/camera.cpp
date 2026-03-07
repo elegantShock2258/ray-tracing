@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../config.cpp"
 #include "../graphics/color.cpp"
 #include "../graphics/utils.cpp"
 #include "../maths/interval.cpp"
@@ -9,7 +10,6 @@
 #include "../renderers/utils.cpp"
 #include "../ui/progressbar.hpp"
 
-#include <chrono>
 #include <cstdio>
 #include <fstream>
 #include <iostream>
@@ -46,8 +46,6 @@ private:
   }
 
 public:
-  int samples_per_pixel = 10;
-
   Camera(int focal_length, int vh, Vector3 center, int image_height,
          int image_width) {
 
@@ -105,12 +103,12 @@ public:
 
       Color pc(0, 0, 0);
 
-      for (int sample = 0; sample < samples_per_pixel; sample++) {
+      for (int sample = 0; sample < SAMPLES_PER_PIXEL; sample++) {
         Ray t = getRayFromCamera(i, j);
         pc += getRayColor(t, world, local_rec);
       }
 
-      pc /= samples_per_pixel;
+      pc /= SAMPLES_PER_PIXEL;
 
       sem.acquire();
       bar.update();
@@ -129,8 +127,7 @@ public:
 
     progressbar bar(image_height * image_width);
 
-    auto CHUNK_AREA = 108 * 192 * 1LL;
-
+#ifdef CPU_RENDERING
     unsigned long long const area = (image_height * 1ULL * image_width);
 
     unsigned long long const chunks = (area / CHUNK_AREA) + 1;
@@ -182,5 +179,7 @@ public:
 
       std::remove(("chunk" + std::to_string(i)).c_str());
     }
+
+#endif
   }
 };
